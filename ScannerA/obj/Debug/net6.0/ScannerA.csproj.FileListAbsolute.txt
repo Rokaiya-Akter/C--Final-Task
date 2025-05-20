@@ -1,0 +1,4 @@
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net6.0\ScannerA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net6.0\ScannerA.AssemblyInfoInputs.cache
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net6.0\ScannerA.AssemblyInfo.cs
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net6.0\ScannerA.csproj.CoreCompileInputs.cache

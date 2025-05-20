@@ -1,0 +1,14 @@
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net8.0\ScannerA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net8.0\ScannerA.AssemblyInfoInputs.cache
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net8.0\ScannerA.AssemblyInfo.cs
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net8.0\ScannerA.csproj.CoreCompileInputs.cache
+C:\Users\Surface\FileScannerSystem\ScannerA\bin\Debug\net8.0\ScannerA.exe
+C:\Users\Surface\FileScannerSystem\ScannerA\bin\Debug\net8.0\ScannerA.deps.json
+C:\Users\Surface\FileScannerSystem\ScannerA\bin\Debug\net8.0\ScannerA.runtimeconfig.json
+C:\Users\Surface\FileScannerSystem\ScannerA\bin\Debug\net8.0\ScannerA.dll
+C:\Users\Surface\FileScannerSystem\ScannerA\bin\Debug\net8.0\ScannerA.pdb
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net8.0\ScannerA.dll
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net8.0\refint\ScannerA.dll
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net8.0\ScannerA.pdb
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net8.0\ScannerA.genruntimeconfig.cache
+C:\Users\Surface\FileScannerSystem\ScannerA\obj\Debug\net8.0\ref\ScannerA.dll
