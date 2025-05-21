@@ -7,7 +7,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic; 
 
-
+//staring class
 class ScannerA
 {
     static void Main(string[] args)
