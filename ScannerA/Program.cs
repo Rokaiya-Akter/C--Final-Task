@@ -1,22 +1,21 @@
-// === ScannerA/Program.cs ===
+// === ScannerB/Program.cs ===
 using System;
 using System.IO;
 using System.IO.Pipes;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 
-//staring class
-class ScannerA
+class ScannerB
 {
     static void Main(string[] args)
     {
-        Process.GetCurrentProcess().ProcessorAffinity = (IntPtr)(1 << 0); // CPU Core 0
-        Console.WriteLine("[ScannerA] Started on CPU Core 0");
+        Process.GetCurrentProcess().ProcessorAffinity = (IntPtr)(1 << 1); // CPU Core 1
+        Console.WriteLine("[ScannerB] Started on CPU Core 1");
 
-        string directory = args.Length > 0 ? args[0] : "./textsA";
-        string pipeName = "agent1";
+        string directory = args.Length > 0 ? args[0] : "./textsB";
+        string pipeName = "agent2";
 
         Thread worker = new Thread(() => ScanAndSend(directory, pipeName));
         worker.Start();
@@ -38,6 +37,7 @@ class ScannerA
                 if (!wordCounts.ContainsKey(w)) wordCounts[w] = 0;
                 wordCounts[w]++;
             }
+
             foreach (var kvp in wordCounts)
             {
                 writer.WriteLine($"{Path.GetFileName(file)}:{kvp.Key}:{kvp.Value}");
@@ -45,4 +45,3 @@ class ScannerA
         }
     }
 }
-
