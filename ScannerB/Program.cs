@@ -9,6 +9,7 @@ using System.Collections.Generic;
 //starting class
 class ScannerB
 {
+    //using static void function
     static void Main(string[] args)
     {
         Process.GetCurrentProcess().ProcessorAffinity = (IntPtr)(1 << 1); // CPU Core 1
