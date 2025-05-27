@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exeagain</OutputType>
+//typing output
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
