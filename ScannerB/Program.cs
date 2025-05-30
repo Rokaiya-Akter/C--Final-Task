@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic; 
-//starting class
+//starting class sec
 class ScannerB
 {
     //using static void function
