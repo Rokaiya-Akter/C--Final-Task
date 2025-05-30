@@ -20,7 +20,7 @@ class ScannerB
         Thread worker = new Thread(() => ScanAndSend(directory, pipeName));
         worker.Start();
     }
-
+//static void
     static void ScanAndSend(string dir, string pipeName)
     {
         using var pipe = new NamedPipeClientStream(".", pipeName, PipeDirection.Out);
