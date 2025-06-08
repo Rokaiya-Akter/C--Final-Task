@@ -1,45 +1,116 @@
-# 📁 File Indexing System with C# Agents and Master
+## Project Objective
 
-## 🔍 Overview
+This project implements a distributed system in C# using console applications. It consists of two agent programs (ScannerA and ScannerB) and a master program. The system is designed to:
 
-This project is a distributed word indexing system built with C#. It consists of three console applications:
-
-- **Scanner A (Agent 1)**
-- **Scanner B (Agent 2)**
-- **Master Process**
-
-The scanners analyze `.txt` files and send word counts to the master process via named pipes. The master aggregates and displays the results.
+- Read and process .txt files in parallel
+- Send indexed word data from agents to the master using named pipes
+- Aggregate and display final word frequency or word sequence data
 
 ---
 
-## 🚀 Getting Started
+## System Components
 
-### 🧱 Prerequisites
+1. **ScannerA (Agent A)**
+   - Scans .txt files from a folder named `textsA`
+   - Extracts words and calculates either frequency or sequence
+   - Sends data to the master using pipe named `agent1`
 
-- .NET 6 SDK or higher
-- Windows OS (for Named Pipes and Processor Affinity support)
-- Visual Studio 2022 or newer (recommended)
+2. **ScannerB (Agent B)**
+   - Scans .txt files from folder `textsB`
+   - Sends processed word data to the master via pipe `agent2`
+
+3. **Master Process**
+   - Waits for connections on pipes `agent1` and `agent2`
+   - Receives and merges data from both agents
+   - Displays final aggregated word counts or ordered word lists
 
 ---
 
-## 🛠️ Build Instructions
+## Technologies Used
 
-1. Open the solution in Visual Studio or compile each project using the `dotnet` CLI:
-   ```bash
-   dotnet build ScannerA/ScannerA.csproj
-   dotnet build ScannerB/ScannerB.csproj
-   dotnet build Master/Master.csproj
-  
-  
+- Language: C#
+- Platform: .NET 8.0 SDK + Runtime
+- Communication: Named Pipes (`NamedPipeClientStream`, `NamedPipeServerStream`)
+- Multithreading: Background threads for processing and communication
+- CPU Affinity: Manually set for each executable to run on separate cores
 
-🧵 Multithreading
-Agents use multiple threads:
+---
 
-One for reading files
+## How to Run
 
-One for sending data via named pipes
+1. **Prerequisites:**
+   - Install .NET 8.0 SDK
+   - Ensure folders `textsA` and `textsB` exist and contain .txt files
 
-Master uses multiple threads to handle simultaneous pipe connections and process incoming data.
+2. **Build:**
+   - Open the solution in Visual Studio or use `dotnet build` from terminal
 
-⚙️ CPU Affinity
-Each component is assigned a specific CPU core using Process.ProcessorAffinity to improve parallel performance.
+3. **Run Master:**
+dotnet run --project Master agent1 agent2
+
+
+4. **Run ScannerA and ScannerB (in separate terminals):**
+dotnet run --project ScannerA textsA
+dotnet run --project ScannerB textsB
+
+
+
+## Sample Output
+
+textsA/file1.txt: hello: 3
+textsB/file2.txt: world: 5
+
+
+or (in sequence mode):
+textsA/file1.txt: hello -> world -> test
+
+
+## Multithreading Design
+
+- Each scanner:
+  - Thread 1: Reads and indexes files
+  - Thread 2: Sends data to master
+- Master:
+  - One thread per pipe to process data concurrently
+
+---
+
+## CPU Affinity
+
+Each application is assigned a unique CPU core using the `ProcessorAffinity` property for better parallel performance.
+
+---
+
+## Challenges & Fixes
+
+| Problem                      | Solution                                |
+|-----------------------------|------------------------------------------|
+| .NET 6 Runtime not found     | Upgraded to .NET 8                      |
+| DirectoryNotFoundException  | Created missing `textsA` and `textsB`   |
+| Unordered output            | Adjusted logic to maintain sequence     |
+
+---
+
+## Test Environment
+
+- OS: Windows 10 (x64)
+- Language: C#
+- IDE: Notepad / Visual Studio
+- .NET SDK: 8.0
+- Communication: Named Pipes
+- Output View: Console
+
+---
+
+## Conclusion
+
+- ✔️ Agents scan and send file data in parallel
+- ✔️ Master process merges data correctly
+- ✔️ Communication via named pipes is reliable and efficient
+- ✔️ Gained hands-on experience with multithreading, IPC, and CPU affinity in C#
+
+---
+
+## License
+
+This project is submitted for academic purposes and is not intended for production use.
