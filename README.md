@@ -66,7 +66,7 @@ dotnet ScannerB.dll C:\Users\Surface\FileScannerSystem\textsB
 - ScannerB/Program.cs / ScannerB.csproj  
 - Master/Program.cs/master.csproj  
 - WordCount.cs  
-- testsA.txt  
-- testsB.txt  
+- testsA/testA.txt  
+- testsB/testB.txt  
 - testing report.pdf
 - UML Diagram.pdf
