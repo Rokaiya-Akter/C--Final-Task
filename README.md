@@ -1,116 +1,72 @@
-## Project Objective
+# File Scanner Project (Distributed Systems)
+## Project Summary
+In this project, I made 3 separate C# console applications that work together to scan text files and count words
 
-This project implements a distributed system in C# using console applications. It consists of two agent programs (ScannerA and ScannerB) and a master program. The system is designed to:
+## What Each Part Does
 
-- Read and process .txt files in parallel
-- Send indexed word data from agents to the master using named pipes
-- Aggregate and display final word frequency or word sequence data
+### ScannerA
+- Reads `.txt` files from a folder
+- Counts how many times each word appears
+- Sends that data to the Master using a pipe called `agent1`
 
----
+### ScannerB
+- Same as ScannerA but works on another folder.
+- Sends data to Master through a different pipe `agent2`
 
-## System Components
+### Master
+- Waits for both Scanners to send their data
+- Takes the word counts from both, combines them
+- Shows the final word count results on the screen
 
-1. **ScannerA (Agent A)**
-   - Scans .txt files from a folder named `textsA`
-   - Extracts words and calculates either frequency or sequence
-   - Sends data to the master using pipe named `agent1`
+## Example Output
 
-2. **ScannerB (Agent B)**
-   - Scans .txt files from folder `textsB`
-   - Sends processed word data to the master via pipe `agent2`
+Data received from agent1.  
+Data received from agent2.  
 
-3. **Master Process**
-   - Waits for connections on pipes `agent1` and `agent2`
-   - Receives and merges data from both agents
-   - Displays final aggregated word counts or ordered word lists
+--- Merged Word Count Results ---  
+textA.txt:all:1
+textB.txt:summer:1
+textB.txt:your:1
+textA.txt:i:1
+textA.txt:well:1
+textA.txt:hello:1
+textA.txt:doing:1
+textA.txt:everyone:1
+textA.txt:are:1
+textB.txt:vacation:1
+textB.txt:enjoy:1
+textA.txt:hope:1
 
----
+## How I Built and Ran It
 
-## Technologies Used
+1. I used Visual studio to write all code  (ScannerA, ScannerB, Master)  
+2. I opened 3 different seperate  terminals:  
+   - First, I ran the ScannerA  
+   - Then I ran ScannerB  
+   - Finally, I ran master
 
-- Language: C#
-- Platform: .NET 8.0 SDK + Runtime
-- Communication: Named Pipes (`NamedPipeClientStream`, `NamedPipeServerStream`)
-- Multithreading: Background threads for processing and communication
-- CPU Affinity: Manually set for each executable to run on separate cores
+3. I passed the folder paths and pipe names as arguments like this:  
 
----
+master-
+cd C:\Users\Surface\FileScannerSystem\Master\bin\Debug\net8.0
+dotnet Master.dll agent1 agent2
 
-## How to Run
+scannerA-
+cd C:\Users\Surface\FileScannerSystem\ScannerA\bin\Debug\net8.0
+dotnet ScannerA.dll C:\Users\Surface\FileScannerSystem\textsA
 
-1. **Prerequisites:**
-   - Install .NET 8.0 SDK
-   - Ensure folders `textsA` and `textsB` exist and contain .txt files
-
-2. **Build:**
-   - Open the solution in Visual Studio or use `dotnet build` from terminal
-
-3. **Run Master:**
-dotnet run --project Master agent1 agent2
-
-
-4. **Run ScannerA and ScannerB (in separate terminals):**
-dotnet run --project ScannerA textsA
-dotnet run --project ScannerB textsB
-
-
-
-## Sample Output
-
-textsA/file1.txt: hello: 3
-textsB/file2.txt: world: 5
-
-
-or (in sequence mode):
-textsA/file1.txt: hello -> world -> test
+scannerB-
+cd C:\Users\Surface\FileScannerSystem\ScannerB\bin\Debug\net8.0
+dotnet ScannerB.dll C:\Users\Surface\FileScannerSystem\textsB
 
 
-## Multithreading Design
+## Files in My Project
 
-- Each scanner:
-  - Thread 1: Reads and indexes files
-  - Thread 2: Sends data to master
-- Master:
-  - One thread per pipe to process data concurrently
-
----
-
-## CPU Affinity
-
-Each application is assigned a unique CPU core using the `ProcessorAffinity` property for better parallel performance.
-
----
-
-## Challenges & Fixes
-
-| Problem                      | Solution                                |
-|-----------------------------|------------------------------------------|
-| .NET 6 Runtime not found     | Upgraded to .NET 8                      |
-| DirectoryNotFoundException  | Created missing `textsA` and `textsB`   |
-| Unordered output            | Adjusted logic to maintain sequence     |
-
----
-
-## Test Environment
-
-- OS: Windows 10 (x64)
-- Language: C#
-- IDE: Notepad / Visual Studio
-- .NET SDK: 8.0
-- Communication: Named Pipes
-- Output View: Console
-
----
-
-## Conclusion
-
-- ✔️ Agents scan and send file data in parallel
-- ✔️ Master process merges data correctly
-- ✔️ Communication via named pipes is reliable and efficient
-- ✔️ Gained hands-on experience with multithreading, IPC, and CPU affinity in C#
-
----
-
-## License
-
-This project is submitted for academic purposes and is not intended for production use.
+- ScannerA/Program.cs / ScannerA.csproj  
+- ScannerB/Program.cs / ScannerB.csproj  
+- Master/Program.cs/master.csproj  
+- WordCount.cs  
+- testsA.txt  
+- testsB.txt  
+- testing report.pdf
+- UML Diagram.pdf
